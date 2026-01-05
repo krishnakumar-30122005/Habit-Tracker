@@ -1,0 +1,134 @@
+.monthly-view {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.month-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.month-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.calendar-grid {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+}
+
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 8px;
+}
+
+.calendar-header-cell {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding: 8px;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-cell {
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+    /* var(--border-color); */
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+    cursor: default;
+}
+
+.calendar-cell:hover {
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-cell.today {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+.calendar-cell.empty {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-cell.empty:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Heatmap intensities */
+.intensity-0 {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.intensity-1 {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #86efac;
+}
+
+.intensity-2 {
+    background-color: rgba(16, 185, 129, 0.3);
+    color: #bbf7d0;
+}
+
+.intensity-3 {
+    background-color: rgba(16, 185, 129, 0.6);
+    color: white;
+}
+
+.intensity-4 {
+    background-color: rgba(16, 185, 129, 0.9);
+    color: white;
+}
+
+.date-number {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.score-indicator {
+    font-size: 11px;
+    align-self: flex-end;
+    font-weight: 700;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.legend-item {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}

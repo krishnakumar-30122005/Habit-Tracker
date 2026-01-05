@@ -1,0 +1,91 @@
+.three-d-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg-body);
+    perspective: 1000px;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.3;
+    animation: float 30s infinite ease-in-out;
+    will-change: transform;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--secondary);
+    bottom: 10%;
+    right: -50px;
+    animation-delay: -5s;
+    will-change: transform;
+}
+
+.orb-3 {
+    width: 250px;
+    height: 250px;
+    background: #8b5cf6;
+    top: 40%;
+    left: 60%;
+    animation-delay: -10s;
+}
+
+.grid-plane {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: rotateX(60deg) translateY(-100px) translateZ(-200px);
+    animation: grid-move 30s linear infinite;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+    pointer-events: none;
+    will-change: transform;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate3d(30px, -50px, 40px) scale(1.1);
+    }
+
+    66% {
+        transform: translate3d(-20px, 20px, -20px) scale(0.9);
+    }
+}
+
+@keyframes grid-move {
+    0% {
+        transform: rotateX(60deg) translateY(0) translateZ(-200px);
+    }
+
+    100% {
+        transform: rotateX(60deg) translateY(40px) translateZ(-200px);
+    }
+}

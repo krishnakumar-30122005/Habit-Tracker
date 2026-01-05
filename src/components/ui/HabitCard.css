@@ -1,0 +1,182 @@
+.habit-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-card);
+    padding: 16px 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.habit-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-md);
+}
+
+.habit-card.completed {
+    background-color: rgba(16, 185, 129, 0.05);
+    /* very subtle green tint */
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.habit-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.habit-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-badge {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+}
+
+.category-badge.health {
+    color: #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.category-badge.learning {
+    color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.category-badge.productivity {
+    color: #8b5cf6;
+    background-color: rgba(139, 92, 246, 0.1);
+}
+
+.category-badge.mindset {
+    color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.category-badge.lifestyle {
+    color: #ec4899;
+    background-color: rgba(236, 72, 153, 0.1);
+}
+
+.streak-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.streak-indicator .active-flame {
+    color: #f97316;
+    /* Orange fire */
+    fill: #f97316;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.habit-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.habit-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.habit-card:hover .habit-actions {
+    opacity: 1;
+}
+
+.action-icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+}
+
+.action-icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.action-icon-btn.delete:hover {
+    color: var(--danger);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.habit-card.completed .habit-title {
+    opacity: 0.8;
+}
+
+.habit-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.check-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    /* Rounded square instead of circle */
+    background-color: #2a2e36;
+    border: 2px solid transparent;
+    color: transparent;
+    /* Hide icon initially if uncompleted, or just grey */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.5, 0.8, 0.2, 1.2);
+    margin-left: 20px;
+}
+
+.check-btn:hover {
+    background-color: #323842;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.check-btn svg {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: scale(0.5);
+    opacity: 0;
+}
+
+.check-btn.completed {
+    background-color: var(--success);
+    color: white;
+    border-color: transparent;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.5);
+}
+
+.check-btn.completed svg {
+    transform: scale(1);
+    opacity: 1;
+}
