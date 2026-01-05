@@ -13,7 +13,7 @@ router.get('/', auth, async (req, res) => {
         res.json(todos);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -34,7 +34,7 @@ router.post('/', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -67,7 +67,7 @@ router.put('/:id', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -88,7 +88,7 @@ router.delete('/:id', auth, async (req, res) => {
         res.json({ msg: 'Todo removed' });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 

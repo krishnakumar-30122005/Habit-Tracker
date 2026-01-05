@@ -14,7 +14,7 @@ router.get('/', auth, async (req, res) => {
         res.json({ habits, logs });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -39,7 +39,7 @@ router.post('/', auth, async (req, res) => {
         res.json(habit);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -77,7 +77,7 @@ router.put('/:id', auth, async (req, res) => {
         res.json(habit);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -102,7 +102,7 @@ router.delete('/:id', auth, async (req, res) => {
         res.json({ msg: 'Habit removed' });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -140,7 +140,7 @@ router.post('/:id/toggle', auth, async (req, res) => {
         }
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
