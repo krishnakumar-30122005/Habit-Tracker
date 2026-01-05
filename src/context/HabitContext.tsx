@@ -34,7 +34,7 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const fetchHabits = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/habits', {
+            const res = await fetch('/api/habits', {
                 headers: { 'x-auth-token': token! }
             });
             const data = await res.json();
@@ -57,7 +57,7 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const addHabit = async (habitData: Omit<Habit, 'id' | 'createdDt' | 'streak' | 'bestStreak' | 'archived'>) => {
         try {
-            const res = await fetch('http://localhost:5000/api/habits', {
+            const res = await fetch('/api/habits', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const updateHabit = async (id: string, updates: Partial<Habit>) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/habits/${id}`, {
+            const res = await fetch(`/api/habits/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const deleteHabit = async (id: string) => {
         try {
-            await fetch(`http://localhost:5000/api/habits/${id}`, {
+            await fetch(`/api/habits/${id}`, {
                 method: 'DELETE',
                 headers: { 'x-auth-token': token! }
             });
@@ -104,7 +104,7 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const toggleHabitCompletion = async (habitId: string, date: string) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/habits/${habitId}/toggle`, {
+            const res = await fetch(`/api/habits/${habitId}/toggle`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

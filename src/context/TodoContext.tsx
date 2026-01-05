@@ -32,7 +32,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const fetchTodos = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/todos', {
+            const res = await fetch('/api/todos', {
                 headers: { 'x-auth-token': token! }
             });
             const data = await res.json();
@@ -44,7 +44,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const addTodo = async (title: string, date?: string) => {
         try {
-            const res = await fetch('http://localhost:5000/api/todos', {
+            const res = await fetch('/api/todos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setTodos(prev => prev.map(t => t._id === id ? { ...t, completed } : t));
 
         try {
-            await fetch(`http://localhost:5000/api/todos/${id}`, {
+            await fetch(`/api/todos/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const deleteTodo = async (id: string) => {
         setTodos(prev => prev.filter(t => t._id !== id));
         try {
-            await fetch(`http://localhost:5000/api/todos/${id}`, {
+            await fetch(`/api/todos/${id}`, {
                 method: 'DELETE',
                 headers: { 'x-auth-token': token! }
             });

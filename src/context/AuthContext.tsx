@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const loadUser = async () => {
             if (token) {
                 try {
-                    const res = await fetch('http://localhost:5000/api/auth/user', {
+                    const res = await fetch('/api/auth/user', {
                         headers: {
                             'x-auth-token': token
                         }
