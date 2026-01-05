@@ -60,6 +60,30 @@ const MainLayout: React.FC = () => {
                 </div>
             </main>
 
+            <nav className="mobile-bottom-nav">
+                <NavLink to="/" end className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <LayoutDashboard size={24} />
+                    <span className="mobile-nav-label">Daily</span>
+                </NavLink>
+                <NavLink to="/calendar" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <Calendar size={24} />
+                    <span className="mobile-nav-label">Calendar</span>
+                </NavLink>
+                <div className="mobile-fab-container">
+                    <button className="mobile-fab" onClick={() => setIsModalOpen(true)}>
+                        <PlusCircle size={28} />
+                    </button>
+                </div>
+                <NavLink to="/analytics" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <BarChart2 size={24} />
+                    <span className="mobile-nav-label">Analytics</span>
+                </NavLink>
+                <NavLink to="/settings" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <Settings size={24} />
+                    <span className="mobile-nav-label">Settings</span>
+                </NavLink>
+            </nav>
+
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
