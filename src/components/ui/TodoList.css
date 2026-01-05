@@ -125,3 +125,19 @@
     padding: 20px;
     font-style: italic;
 }
+
+@media (max-width: 768px) {
+    .todo-delete-btn {
+        opacity: 1;
+        /* Always visible on touch devices */
+    }
+
+    .todo-input-form {
+        flex-direction: column;
+    }
+
+    .todo-add-btn {
+        width: 100%;
+        height: 40px;
+    }
+}
