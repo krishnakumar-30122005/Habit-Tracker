@@ -27,15 +27,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/habit-tra
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error('MongoDB Connection Error:', err));
 
-console.log('Initializing server...');
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/habits', habitRoutes);
 app.use('/api/todos', (await import('./routes/todos.js')).default);
 
 // Catch-all handler for any request that doesn't match the above
-app.get('*', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
