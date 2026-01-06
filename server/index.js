@@ -31,6 +31,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/habit-tra
 app.use('/api/auth', authRoutes);
 app.use('/api/habits', habitRoutes);
 app.use('/api/todos', (await import('./routes/todos.js')).default);
+app.use('/api/ai', (await import('./routes/ai.js')).default);
 
 // Catch-all handler for any request that doesn't match the above
 app.use((req, res) => {

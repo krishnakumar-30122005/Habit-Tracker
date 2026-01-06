@@ -20,6 +20,14 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    xp: {
+        type: Number,
+        default: 0
+    },
+    level: {
+        type: Number,
+        default: 1
     }
 });
 

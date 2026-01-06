@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { LayoutDashboard, Calendar, BarChart2, Settings, PlusCircle, LogOut } from 'lucide-react';
+import { LayoutDashboard, Calendar, BarChart2, Settings, PlusCircle, LogOut, Sparkles } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Modal } from '../ui/Modal';
 import { HabitForm } from '../../features/habits/HabitForm';
+import NotificationManager from '../../features/notifications/NotificationManager';
+import LevelBadge from '../gamification/LevelBadge';
+import { Trophy } from 'lucide-react';
 import './MainLayout.css';
 
 const MainLayout: React.FC = () => {
@@ -12,6 +15,7 @@ const MainLayout: React.FC = () => {
 
     return (
         <div className="layout-container">
+            <NotificationManager />
             <aside className="sidebar">
                 <div className="sidebar-header">
                     <div className="logo-icon">H</div>
@@ -31,6 +35,14 @@ const MainLayout: React.FC = () => {
                         <BarChart2 size={20} />
                         <span>Analytics</span>
                     </NavLink>
+                    <NavLink to="/coach" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                        <Sparkles size={20} />
+                        <span>AI Coach</span>
+                    </NavLink>
+                    <NavLink to="/leaderboard" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                        <Trophy size={20} />
+                        <span>Leaderboard</span>
+                    </NavLink>
                     <NavLink to="/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                         <Settings size={20} />
                         <span>Settings</span>
@@ -47,8 +59,12 @@ const MainLayout: React.FC = () => {
 
             <main className="main-content">
                 <header className="top-bar">
-                    <h1 className="page-title">Today's Focus</h1>
+                    <div className="top-bar-left">
+                        <h1 className="page-title">Today's Focus</h1>
+                    </div>
+
                     <div className="top-actions">
+                        <LevelBadge />
                         <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
                             <PlusCircle size={18} />
                             <span>New Habit</span>
@@ -78,9 +94,17 @@ const MainLayout: React.FC = () => {
                     <BarChart2 size={24} />
                     <span className="mobile-nav-label">Analytics</span>
                 </NavLink>
+                <NavLink to="/coach" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <Sparkles size={24} />
+                    <span className="mobile-nav-label">Coach</span>
+                </NavLink>
                 <NavLink to="/settings" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
                     <Settings size={24} />
                     <span className="mobile-nav-label">Settings</span>
+                </NavLink>
+                <NavLink to="/leaderboard" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+                    <Trophy size={24} />
+                    <span className="mobile-nav-label">Ranks</span>
                 </NavLink>
             </nav>
 

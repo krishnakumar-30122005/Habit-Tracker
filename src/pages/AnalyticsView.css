@@ -116,3 +116,52 @@
     border-left-color: var(--info);
     background-color: rgba(59, 130, 246, 0.05);
 }
+
+/* Heatmap Styles */
+.heatmap-card {
+    height: auto;
+    /* Allow auto height for grid */
+    min-height: 200px;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(53, 1fr);
+    /* 53 weeks roughly */
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Level 0 */
+}
+
+.heatmap-cell.level-1 {
+    background-color: rgba(16, 185, 129, 0.2);
+}
+
+.heatmap-cell.level-2 {
+    background-color: rgba(16, 185, 129, 0.4);
+}
+
+.heatmap-cell.level-3 {
+    background-color: rgba(16, 185, 129, 0.7);
+}
+
+.heatmap-cell.level-4 {
+    background-color: #10b981;
+}
+
+/* Full Green */
+
+@media (max-width: 768px) {
+    .heatmap-grid {
+        grid-template-columns: repeat(20, 1fr);
+        /* Show fewer columns on mobile */
+        overflow-x: hidden;
+        /* Or allow scroll */
+    }
+}

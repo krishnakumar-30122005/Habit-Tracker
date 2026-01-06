@@ -83,6 +83,40 @@ export const AnalyticsView: React.FC = () => {
                 </div>
             )}
 
+            <div className="chart-card heatmap-card">
+                <h3>Yearly Consistency Heatmap</h3>
+                <div className="heatmap-container">
+                    {(() => {
+                        const today = new Date();
+                        const yearAgo = subDays(today, 364);
+                        const days = eachDayOfInterval({ start: yearAgo, end: today });
+
+                        return (
+                            <div className="heatmap-grid">
+                                {days.map(day => {
+                                    const dateStr = format(day, 'yyyy-MM-dd');
+                                    const count = logs.filter(l => l.date === dateStr && l.completed).length;
+
+                                    let intensity = 'level-0';
+                                    if (count > 0) intensity = 'level-1';
+                                    if (count > 2) intensity = 'level-2';
+                                    if (count > 4) intensity = 'level-3';
+                                    if (count > 7) intensity = 'level-4';
+
+                                    return (
+                                        <div
+                                            key={dateStr}
+                                            className={`heatmap-cell ${intensity}`}
+                                            title={`${dateStr}: ${count} completions`}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        );
+                    })()}
+                </div>
+            </div>
+
             <div className="charts-grid">
                 <div className="chart-card">
                     <h3>Completion Trend (Last 14 Days)</h3>

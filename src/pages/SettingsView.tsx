@@ -1,12 +1,14 @@
 
 import React from 'react';
 import { useHabits } from '../context/HabitContext';
-import { Download, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { Download, Moon, Sun } from 'lucide-react';
 import { format } from 'date-fns';
 import './SettingsView.css';
 
 export const SettingsView: React.FC = () => {
     const { habits, logs } = useHabits();
+    const { theme, toggleTheme } = useTheme();
 
     const handleExport = () => {
         // 1. Prepare Data
@@ -77,14 +79,30 @@ export const SettingsView: React.FC = () => {
                 </div>
             </div>
 
+
+
+            <div className="settings-section">
+                <h3>Notifications</h3>
+                <p className="settings-desc">Get reminders at 9 AM, 2 PM, and 8 PM if you have unfinished habits.</p>
+                <div className="settings-actions">
+                    <button
+                        className="btn-secondary"
+                        onClick={() => Notification.requestPermission().then(p => {
+                            if (p === 'granted') new Notification('Reminders Enabled! 🔔');
+                        })}
+                    >
+                        <span>🔔 Enable Reminders</span>
+                    </button>
+                </div>
+            </div>
+
             <div className="settings-section">
                 <h3>Appearance</h3>
                 <p className="settings-desc">Toggle between dark and light mode (System default currently active).</p>
                 <div className="settings-actions">
-                    {/* Placeholder for theme toggle implementation */}
-                    <button className="btn-secondary" disabled>
-                        <Moon size={18} />
-                        <span>Dark Mode</span>
+                    <button className="btn-secondary" onClick={toggleTheme}>
+                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
                     </button>
                 </div>
             </div>
@@ -93,6 +111,6 @@ export const SettingsView: React.FC = () => {
                 <p>HabitFlow v1.0.0</p>
                 <p>Local Storage Used: {JSON.stringify(localStorage).length} bytes</p>
             </div>
-        </div>
+        </div >
     );
 };

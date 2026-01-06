@@ -3,6 +3,7 @@ const router = express.Router();
 import { auth } from '../middleware/auth.js';
 import Habit from '../models/Habit.js';
 import HabitLog from '../models/HabitLog.js';
+import User from '../models/User.js';
 
 // @route   GET api/habits
 // @desc    Get all users habits
@@ -126,7 +127,22 @@ router.post('/:id/toggle', auth, async (req, res) => {
         if (log) {
             // If exists, remove it (toggle off)
             await HabitLog.findByIdAndDelete(log.id);
-            res.json({ msg: 'Toggled off', state: 'uncompleted', habitId: req.params.id, date });
+
+            // Gamification: Revert XP
+            const user = await User.findById(req.user.id);
+            if (user) {
+                user.xp = Math.max(0, user.xp - 10);
+                user.level = Math.floor(user.xp / 100) + 1;
+                await user.save();
+            }
+
+            res.json({
+                msg: 'Toggled off',
+                state: 'uncompleted',
+                habitId: req.params.id,
+                date,
+                userStats: { xp: user?.xp, level: user?.level }
+            });
         } else {
             // Create new log
             const newLog = new HabitLog({
@@ -136,7 +152,29 @@ router.post('/:id/toggle', auth, async (req, res) => {
                 completed: true
             });
             await newLog.save();
-            res.json({ msg: 'Toggled on', state: 'completed', habitId: req.params.id, date });
+
+            // Gamification: Add XP
+            const user = await User.findById(req.user.id);
+            let levelUp = false;
+
+            if (user) {
+                user.xp += 10;
+                const newLevel = Math.floor(user.xp / 100) + 1;
+                if (newLevel > user.level) {
+                    user.level = newLevel;
+                    levelUp = true;
+                }
+                await user.save();
+            }
+
+            res.json({
+                msg: 'Toggled on',
+                state: 'completed',
+                habitId: req.params.id,
+                date,
+                userStats: { xp: user?.xp, level: user?.level },
+                levelUp
+            });
         }
     } catch (err) {
         console.error(err.message);

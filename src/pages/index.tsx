@@ -7,6 +7,7 @@ export * from './DailyView';
 export * from './WeeklyView';
 export { MonthlyView }; // Keep this as is, as MonthlyView is imported and then re-exported specifically.
 export * from './AnalyticsView';
+export * from './CoachView';
 
 export const CalendarView: React.FC = () => {
     // Alias to MonthlyView
@@ -14,3 +15,4 @@ export const CalendarView: React.FC = () => {
 };
 
 export { SettingsView } from './SettingsView';
+export { default as LeaderboardView } from './LeaderboardView';

@@ -1,9 +1,10 @@
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
-import { DailyView, WeeklyView, CalendarView, AnalyticsView, SettingsView, Login, Signup } from './pages';
+import { DailyView, WeeklyView, CalendarView, AnalyticsView, SettingsView, Login, Signup, CoachView, LeaderboardView } from './pages';
 import { ThreeDBackground } from './components/ui/ThreeDBackground';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { HabitProvider } from './context/HabitContext';
 import { TodoProvider } from './context/TodoContext';
 
@@ -35,6 +36,8 @@ function AppRoutes() {
           <Route path="weekly" element={<WeeklyView />} />
           <Route path="calendar" element={<CalendarView />} />
           <Route path="analytics" element={<AnalyticsView />} />
+          <Route path="coach" element={<CoachView />} />
+          <Route path="leaderboard" element={<LeaderboardView />} />
           <Route path="settings" element={<SettingsView />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
@@ -46,12 +49,14 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
-      <ThreeDBackground />
-      <HabitProvider>
-        <TodoProvider>
-          <AppRoutes />
-        </TodoProvider>
-      </HabitProvider>
+      <ThemeProvider>
+        <ThreeDBackground />
+        <HabitProvider>
+          <TodoProvider>
+            <AppRoutes />
+          </TodoProvider>
+        </HabitProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

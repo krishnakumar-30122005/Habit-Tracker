@@ -105,4 +105,20 @@ router.get('/user', auth, async (req, res) => {
     }
 });
 
+// @route   GET api/auth/leaderboard
+// @desc    Get top 10 users by XP
+// @access  Private
+router.get('/leaderboard', auth, async (req, res) => {
+    try {
+        const users = await User.find()
+            .sort({ xp: -1 })
+            .limit(10)
+            .select('name xp level'); // Select only safe public fields
+        res.json(users);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ msg: 'Server Error' });
+    }
+});
+
 export default router;

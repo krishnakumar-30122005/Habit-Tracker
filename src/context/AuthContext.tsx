@@ -5,6 +5,8 @@ interface User {
     _id: string;
     name: string;
     email: string;
+    xp: number;
+    level: number;
 }
 
 interface AuthContextType {
