@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useHabits } from '../context/HabitContext';
 import {
-    AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis
+    AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell
 } from 'recharts';
 import { format, subDays, eachDayOfInterval } from 'date-fns';
 import clsx from 'clsx';
