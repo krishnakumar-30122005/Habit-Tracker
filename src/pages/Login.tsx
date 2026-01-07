@@ -31,7 +31,18 @@ export const Login: React.FC = () => {
             }
 
             login(data.token);
-            navigate('/');
+
+            // Check role and redirect
+            try {
+                const tokenPayload = JSON.parse(atob(data.token.split('.')[1]));
+                if (tokenPayload.user.role === 'admin') {
+                    navigate('/admin', { replace: true });
+                } else {
+                    navigate('/', { replace: true });
+                }
+            } catch (e) {
+                navigate('/', { replace: true });
+            }
         } catch (err: any) {
             setError(err.message);
         }
@@ -75,6 +86,9 @@ export const Login: React.FC = () => {
 
                 <p className="auth-footer">
                     Don't have an account? <Link to="/signup">Sign Up</Link>
+                </p>
+                <p className="auth-footer" style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
+                    <Link to="/admin/login" className="text-gray-500 hover:text-purple-400">Admin Access</Link>
                 </p>
             </div>
         </div>

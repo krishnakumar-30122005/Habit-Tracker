@@ -7,6 +7,7 @@ interface User {
     email: string;
     xp: number;
     level: number;
+    role: 'user' | 'admin';
 }
 
 interface AuthContextType {
@@ -16,6 +17,9 @@ interface AuthContextType {
     loading: boolean;
     login: (token: string) => void;
     logout: () => void;
+    updateUserStats: (stats: { xp?: number; level?: number }, isLevelUp?: boolean) => void;
+    showLevelUp: boolean;
+    closeLevelUp: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,6 +28,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
+
+    const [showLevelUp, setShowLevelUp] = useState(false);
 
     useEffect(() => {
         const loadUser = async () => {
@@ -50,7 +56,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
             setLoading(false);
         };
-
         loadUser();
     }, [token]);
 
@@ -65,6 +70,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
     };
 
+    const updateUserStats = (stats: { xp?: number; level?: number }, isLevelUp: boolean = false) => {
+        if (user) {
+            setUser({ ...user, ...stats });
+            if (isLevelUp) {
+                setShowLevelUp(true);
+            }
+        }
+    };
+
+    const closeLevelUp = () => setShowLevelUp(false);
+
     return (
         <AuthContext.Provider value={{
             user,
@@ -72,7 +88,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             isAuthenticated: !!user,
             loading,
             login,
-            logout
+            logout,
+            updateUserStats,
+            showLevelUp,
+            closeLevelUp
         }}>
             {children}
         </AuthContext.Provider>

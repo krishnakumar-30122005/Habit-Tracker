@@ -19,7 +19,7 @@ interface HabitContextType {
 const HabitContext = createContext<HabitContextType | undefined>(undefined);
 
 export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { token, isAuthenticated } = useAuth();
+    const { token, isAuthenticated, updateUserStats } = useAuth();
     const [habits, setHabits] = useState<Habit[]>([]);
     const [logs, setLogs] = useState<HabitLog[]>([]);
 
@@ -41,15 +41,15 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             // Backend sends { habits, logs }
             // Mongoose objects contain _id, we need to map to id or handle it.
             // My types expect 'id'. Let's map _id to id.
-            const mappedHabits = data.habits.map((h: any) => ({ ...h, id: h._id }));
-            // Logs structure from API might need mapping too?
-            // HabitLog backend: habitId, userId, date, completed, count
-            // HabitLog frontend: id, habitId, date, completed, count
-            // Backend habitId is ObjectId.
-            const mappedLogs = data.logs.map((l: any) => ({ ...l, id: l._id }));
+            if (data.habits && Array.isArray(data.habits)) {
+                const mappedHabits = data.habits.map((h: any) => ({ ...h, id: h._id }));
+                setHabits(mappedHabits);
+            }
 
-            setHabits(mappedHabits);
-            setLogs(mappedLogs);
+            if (data.logs && Array.isArray(data.logs)) {
+                const mappedLogs = data.logs.map((l: any) => ({ ...l, id: l._id }));
+                setLogs(mappedLogs);
+            }
         } catch (err) {
             console.error(err);
         }
@@ -113,6 +113,11 @@ export const HabitProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 body: JSON.stringify({ date })
             });
             const data = await res.json();
+
+            // Update user Gamification Stats
+            if (data.userStats) {
+                updateUserStats(data.userStats, data.levelUp);
+            }
 
             if (data.state === 'completed') {
                 // Toggled on

@@ -1,0 +1,139 @@
+/* FocusView.css */
+.focus-view-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.focus-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.focus-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-1);
+    margin-bottom: 0.5rem;
+}
+
+.focus-header p {
+    color: var(--text-2);
+}
+
+.focus-center-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.timer-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--surface-1) 0%, var(--surface-0) 100%);
+    border: 6px solid var(--color-primary);
+    box-shadow: 0 0 50px var(--color-primary-glow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+}
+
+.timer-circle:hover {
+    box-shadow: 0 0 80px var(--color-primary-glow);
+}
+
+.time-display {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--text-1);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.timer-status {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.peers-online {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--surface-2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--border-dim);
+    font-size: 1rem;
+    color: var(--text-2);
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-success);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-success);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.4);
+    }
+
+    70% {
+        opacity: 0;
+        box-shadow: 0 0 0 10px rgba(0, 255, 157, 0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.timer-controls button {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.start-focus-btn {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 8px 25px var(--color-primary-glow);
+}
+
+.start-focus-btn:hover {
+    transform: translateY(-2px);
+    background: var(--color-primary-hover);
+}
+
+.stop-focus-btn {
+    background: var(--surface-3);
+    color: var(--text-1);
+    border: 1px solid var(--border-dim) !important;
+}
+
+.stop-focus-btn:hover {
+    background: var(--surface-2);
+}

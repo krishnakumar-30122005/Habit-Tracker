@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Trophy, Medal, User } from 'lucide-react';
+import { Trophy, User } from 'lucide-react';
 import './LeaderboardView.css';
 
 interface LeaderboardUser {
@@ -37,9 +37,9 @@ const LeaderboardView: React.FC = () => {
 
     const getRankIcon = (index: number) => {
         switch (index) {
-            case 0: return <Medal className="rank-icon gold" size={24} />;
-            case 1: return <Medal className="rank-icon silver" size={24} />;
-            case 2: return <Medal className="rank-icon bronze" size={24} />;
+            case 0: return <img src="/assets/3d/gold.png" alt="Gold" className="rank-medal" />;
+            case 1: return <img src="/assets/3d/silver.png" alt="Silver" className="rank-medal" />;
+            case 2: return <img src="/assets/3d/bronze.png" alt="Bronze" className="rank-medal" />;
             default: return <span className="rank-number">#{index + 1}</span>;
         }
     };

@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { LayoutDashboard, Calendar, BarChart2, Settings, PlusCircle, LogOut, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Calendar, BarChart2, Settings, PlusCircle, LogOut, Sparkles, Trophy, Clock, Shield } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Modal } from '../ui/Modal';
 import { HabitForm } from '../../features/habits/HabitForm';
 import NotificationManager from '../../features/notifications/NotificationManager';
 import LevelBadge from '../gamification/LevelBadge';
-import { Trophy } from 'lucide-react';
+import { LevelUpModal } from '../gamification/LevelUpModal';
+
 import './MainLayout.css';
 
 const MainLayout: React.FC = () => {
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="layout-container">
             <NotificationManager />
+            <LevelUpModal />
             <aside className="sidebar">
                 <div className="sidebar-header">
                     <div className="logo-icon">H</div>
@@ -43,10 +45,22 @@ const MainLayout: React.FC = () => {
                         <Trophy size={20} />
                         <span>Leaderboard</span>
                     </NavLink>
+                    <NavLink to="/focus" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                        <Clock size={20} />
+                        <span>Focus Room</span>
+                    </NavLink>
+
                     <NavLink to="/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                         <Settings size={20} />
                         <span>Settings</span>
                     </NavLink>
+
+                    {user?.role === 'admin' && (
+                        <NavLink to="/admin" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''} admin-link`}>
+                            <Shield size={20} />
+                            <span>Admin Portal</span>
+                        </NavLink>
+                    )}
                 </nav>
 
                 <div className="sidebar-footer">

@@ -16,3 +16,8 @@ export const CalendarView: React.FC = () => {
 
 export { SettingsView } from './SettingsView';
 export { default as LeaderboardView } from './LeaderboardView';
+export { AdminDashboard } from './AdminDashboard';
+export { AdminLogin } from './AdminLogin';
+export { AdminUsers } from './AdminUsers';
+export { AdminSettings } from './AdminSettings';
+export { default as FocusView } from './FocusView';

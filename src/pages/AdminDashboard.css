@@ -1,0 +1,158 @@
+/* AdminDashboard.css - Force Layout Structure */
+
+.admin-dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    /* Force vertical separation */
+}
+
+/* Header Section */
+.dashboard-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+    color: #9ca3af;
+    font-size: 1rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Force 3 columns */
+    gap: 2rem;
+    /* Force gap between cards */
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Stat Card Styling */
+.stat-card-custom {
+    background-color: #1a1d24;
+    border: 1px solid #374151;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    /* Force height */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    border-color: #4b5563;
+}
+
+.stat-icon-wrapper {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-blue {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+}
+
+.icon-purple {
+    background-color: rgba(168, 85, 247, 0.1);
+    color: #c084fc;
+}
+
+.icon-amber {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+}
+
+.stat-content label {
+    display: block;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.stat-content h2 {
+    color: white;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.badge-green {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+}
+
+.badge-purple {
+    background-color: rgba(168, 85, 247, 0.1);
+    color: #c084fc;
+}
+
+.badge-amber {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+}
+
+/* Dashboard Placeholder */
+.dashboard-placeholder {
+    width: 100%;
+    height: 300px;
+    border: 2px dashed #374151;
+    border-radius: 1.5rem;
+    background-color: rgba(26, 29, 36, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    gap: 1rem;
+}

@@ -1,7 +1,7 @@
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
-import { DailyView, WeeklyView, CalendarView, AnalyticsView, SettingsView, Login, Signup, CoachView, LeaderboardView } from './pages';
+import AdminLayout from './components/layout/AdminLayout';
+import { DailyView, WeeklyView, CalendarView, AnalyticsView, SettingsView, Login, Signup, CoachView, LeaderboardView, AdminDashboard, AdminLogin, AdminUsers, AdminSettings, FocusView } from './pages';
 import { ThreeDBackground } from './components/ui/ThreeDBackground';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -26,6 +26,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route path="/" element={
           <PrivateRoute>
@@ -38,8 +39,17 @@ function AppRoutes() {
           <Route path="analytics" element={<AnalyticsView />} />
           <Route path="coach" element={<CoachView />} />
           <Route path="leaderboard" element={<LeaderboardView />} />
+          <Route path="focus" element={<FocusView />} />
           <Route path="settings" element={<SettingsView />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+
+        <Route path="/admin" element={
+          <AdminLayout />
+        }>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
     </div>

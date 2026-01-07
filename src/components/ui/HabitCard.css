@@ -18,9 +18,10 @@
 }
 
 .habit-card.completed {
-    background-color: rgba(16, 185, 129, 0.05);
-    /* very subtle green tint */
-    border-color: rgba(16, 185, 129, 0.2);
+    background-color: rgba(16, 185, 129, 0.15);
+    /* Stronger green */
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
 }
 
 .habit-content {
@@ -145,7 +146,7 @@
     height: 48px;
     border-radius: 12px;
     /* Rounded square instead of circle */
-    background-color: #2a2e36;
+    background-color: var(--surface-3);
     border: 2px solid transparent;
     color: transparent;
     /* Hide icon initially if uncompleted, or just grey */
@@ -158,8 +159,8 @@
 }
 
 .check-btn:hover {
-    background-color: #323842;
-    border-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--surface-2);
+    border-color: var(--border-dim);
 }
 
 .check-btn svg {

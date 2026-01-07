@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useHabits } from '../context/HabitContext';
 import { HabitCard } from '../components/ui/HabitCard';
@@ -11,7 +10,7 @@ import type { Habit } from '../types';
 import './DailyView.css';
 
 export const DailyView: React.FC = () => {
-    const { habits, toggleHabitCompletion, deleteHabit } = useHabits();
+    const { habits, logs, toggleHabitCompletion, deleteHabit } = useHabits();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [editingHabit, setEditingHabit] = useState<Habit | undefined>(undefined);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -20,16 +19,21 @@ export const DailyView: React.FC = () => {
     const activeHabits = habits.filter(h => !h.archived);
     const dateStr = format(selectedDate, 'yyyy-MM-dd');
 
-    // Sort: Time of day
+    // Sort: Time of day ONLY (Safe Fallback to fix crash)
     const sortedHabits = [...activeHabits].sort((a, b) => {
-        const order = { morning: 0, afternoon: 1, evening: 2, anytime: 3 };
-        return order[a.timeOfDay] - order[b.timeOfDay];
+        const order: Record<string, number> = { morning: 0, afternoon: 1, evening: 2, anytime: 3 };
+        const rankA = order[a.timeOfDay] ?? 99;
+        const rankB = order[b.timeOfDay] ?? 99;
+        return rankA - rankB;
     });
 
     const isToday = isSameDay(selectedDate, new Date());
-    const { logs } = useHabits();
+
+    // Ensure logs is an array before using it
+    const safeLogs = Array.isArray(logs) ? logs : [];
+
     const completedCount = sortedHabits.filter(h =>
-        logs.some(l => l.habitId === h.id && l.date === dateStr && l.completed)
+        safeLogs.some(l => l.habitId === h.id && l.date === dateStr && l.completed)
     ).length;
 
     const progress = sortedHabits.length > 0 ? (completedCount / sortedHabits.length) * 100 : 0;
@@ -129,7 +133,7 @@ export const DailyView: React.FC = () => {
                         </div>
                     ) : (
                         sortedHabits.map((habit, index) => {
-                            const isCompleted = logs.some(l => l.habitId === habit.id && l.date === dateStr && l.completed);
+                            const isCompleted = safeLogs.some(l => l.habitId === habit.id && l.date === dateStr && l.completed);
                             return (
                                 <div key={habit.id} className="habit-grid-item" style={{ animationDelay: `${index * 100}ms` }}>
                                     <HabitCard

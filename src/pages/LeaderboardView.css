@@ -12,27 +12,24 @@
 .header-icon-bg {
     display: inline-flex;
     padding: 16px;
-    background: rgba(255, 215, 0, 0.1);
+    background: var(--surface-2);
     border-radius: 50%;
     margin-bottom: 16px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid var(--border-dim);
 }
 
 .header-icon {
-    color: #ffd700;
+    color: var(--color-primary);
 }
 
 .leaderboard-header h2 {
     font-size: 24px;
     margin-bottom: 8px;
-    background: linear-gradient(to right, #fff, #a5b4fc);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-1);
 }
 
 .leaderboard-header p {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-2);
 }
 
 .ranking-list {
@@ -45,21 +42,21 @@
     display: flex;
     align-items: center;
     padding: 16px;
-    background: rgba(30, 41, 59, 0.6);
+    background: var(--surface-1);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-dim);
     transition: transform 0.2s, background 0.2s;
 }
 
 .ranking-item:hover {
     transform: translateY(-2px);
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--surface-2);
 }
 
 .ranking-item.current-user {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: #6366f1;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+    background: var(--surface-2);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px var(--color-primary-glow);
 }
 
 .rank-pos {
@@ -69,22 +66,19 @@
     margin-right: 16px;
     font-weight: 700;
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-3);
 }
 
-.rank-icon.gold {
-    color: #ffd700;
-    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+.rank-medal {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: transform 0.2s;
 }
 
-.rank-icon.silver {
-    color: #c0c0c0;
-    filter: drop-shadow(0 0 8px rgba(192, 192, 192, 0.4));
-}
-
-.rank-icon.bronze {
-    color: #cd7f32;
-    filter: drop-shadow(0 0 8px rgba(205, 127, 50, 0.4));
+.ranking-item:hover .rank-medal {
+    transform: scale(1.1);
 }
 
 .rank-user {
@@ -97,12 +91,12 @@
 .user-avatar {
     width: 32px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--surface-3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-2);
 }
 
 .user-info {
@@ -112,12 +106,12 @@
 
 .user-name {
     font-weight: 600;
-    color: #f8fafc;
+    color: var(--text-1);
 }
 
 .user-level-label {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-3);
 }
 
 .rank-xp {
@@ -127,13 +121,13 @@
 .xp-val {
     display: block;
     font-weight: 800;
-    color: #818cf8;
+    color: var(--color-primary);
     font-size: 16px;
 }
 
 .xp-label {
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-3);
     text-transform: uppercase;
     font-weight: 700;
 }

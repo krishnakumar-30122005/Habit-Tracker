@@ -4,6 +4,7 @@ import { auth } from '../middleware/auth.js';
 import Habit from '../models/Habit.js';
 import HabitLog from '../models/HabitLog.js';
 import User from '../models/User.js';
+import Activity from '../models/Activity.js';
 
 // @route   GET api/habits
 // @desc    Get all users habits
@@ -163,6 +164,15 @@ router.post('/:id/toggle', auth, async (req, res) => {
                 if (newLevel > user.level) {
                     user.level = newLevel;
                     levelUp = true;
+
+                    // Log Activity
+                    await Activity.create({
+                        user: req.user.id,
+                        userName: user.name || 'Anonymous',
+                        type: 'LEVEL_UP',
+                        message: `reached Level ${newLevel}!`,
+                        targetId: null
+                    });
                 }
                 await user.save();
             }
